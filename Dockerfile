@@ -25,6 +25,13 @@ RUN ln -f -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 # Install goss https://github.com/aelsabbahy/goss
 RUN curl -fsSL https://goss.rocks/install | sh
 
+ADD files/etc /etc
+
+ARG user=ksaito
+RUN useradd $user
+WORKDIR /home/$user
+USER $user
+
 # FROM base AS docker-base
 # # Install docker-ce https://docs.docker.com/install/linux/docker-ce/ubuntu/
 # RUN apt-get update && apt-get install -y \
@@ -75,7 +82,6 @@ RUN curl -fsSL https://goss.rocks/install | sh
 #  && make -C /tmp/git-secrets-1.2.1 install \
 #  && rm -rf /tmp/git-secrets-1.2.1
 
-ADD files/etc /etc
 
 # FROM dev-base
 
