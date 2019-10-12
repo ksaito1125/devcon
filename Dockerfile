@@ -75,8 +75,7 @@ RUN curl -fsSL https://goss.rocks/install | sh
 #  && make -C /tmp/git-secrets-1.2.1 install \
 #  && rm -rf /tmp/git-secrets-1.2.1
 
-# ADD files/etc /etc
-# ADD files/util /util
+ADD files/etc /etc
 
 # FROM dev-base
 
