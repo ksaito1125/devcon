@@ -1,0 +1,11 @@
+version: '3'
+services:
+  dev:
+    image: ${NAME}
+    command: >
+      bash -c 'chown -R ${USER}:${USER} /home/${USER} &&
+      tail -f /dev/null'
+    volumes:
+      - ${NAME}_${USER}:/home/${USER}:cached
+volumes:
+  dev_ksaito:

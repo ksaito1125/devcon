@@ -30,7 +30,6 @@ ADD files/etc /etc
 ARG user=ksaito
 RUN useradd $user
 WORKDIR /home/$user
-USER $user
 
 # FROM base AS docker-base
 # # Install docker-ce https://docs.docker.com/install/linux/docker-ce/ubuntu/
