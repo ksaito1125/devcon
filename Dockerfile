@@ -65,14 +65,9 @@ WORKDIR /home/$user
 # # Install awscli
 # RUN pip install awscli
 
-# FROM base AS go112
+FROM golang:1.13.1 AS gobase
 
-# RUN wget https://dl.google.com/go/go1.12.7.linux-amd64.tar.gz \
-#  && tar -xvf go1.12.7.linux-amd64.tar.gz
-# ENV GOROOT=/go
-# ENV PATH=$GOROOT/bin:$PATH
-# # Install ghq https://github.com/motemen/ghq
-# RUN go get github.com/motemen/ghq
+RUN go get github.com/motemen/ghq
 
 # FROM cloud-base AS dev-base
 # # Install git-secrets
@@ -82,9 +77,9 @@ WORKDIR /home/$user
 #  && rm -rf /tmp/git-secrets-1.2.1
 
 
-# FROM dev-base
+FROM base
 
-# COPY --from=go112 /root/go/bin/ghq /usr/local/bin/ghq
+COPY --from=gobase /go/bin/ghq /usr/local/bin/ghq
 # # upgrade
 # #RUN apt-get update && apt-get upgrade -y
 
