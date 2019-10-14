@@ -67,7 +67,12 @@ WORKDIR /home/$user
 
 FROM golang:1.13.1 AS gobase
 
+# Install ghq
 RUN go get github.com/motemen/ghq
+
+# Install fzf
+RUN git clone --depth 1 https://github.com/junegunn/fzf.git \
+ && ./fzf/install --key-bindings --completion --no-update-rc
 
 # FROM cloud-base AS dev-base
 # # Install git-secrets
@@ -79,7 +84,12 @@ RUN go get github.com/motemen/ghq
 
 FROM base
 
+# Install ghq
 COPY --from=gobase /go/bin/ghq /usr/local/bin/ghq
+# Install fzf
+COPY --from=gobase /go/fzf/bin/fzf /usr/local/bin/fzf
+COPY --from=gobase /go/fzf//shell/completion.bash /etc/bash_completion.d/fzf
+COPY --from=gobase /go/fzf/shell/key-bindings.bash /etc/profile.d/fzf-key-bindings.sh
 RUN echo "ksaito ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ksaito
 # # upgrade
 # #RUN apt-get update && apt-get upgrade -y
