@@ -2,6 +2,7 @@ version: '3'
 services:
   dev:
     image: ${NAME}
+    hostname: dev
     command: >
       bash -c 'chown -R ${USER}:${USER} /home/${USER} &&
       tail -f /dev/null'
