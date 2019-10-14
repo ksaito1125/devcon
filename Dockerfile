@@ -80,6 +80,7 @@ RUN go get github.com/motemen/ghq
 FROM base
 
 COPY --from=gobase /go/bin/ghq /usr/local/bin/ghq
+RUN echo "ksaito ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ksaito
 # # upgrade
 # #RUN apt-get update && apt-get upgrade -y
 
