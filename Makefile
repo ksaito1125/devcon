@@ -4,10 +4,14 @@ VOLUME=$(NAME)_$(USER):/home/$(USER):cached
 
 .SILENT:
 
+ifdef http_proxy
+BLD_OPTS=--build-arg http_proxy=$$http_proxy --build-arg https_proxy=$$https_proxy --build-arg no_proxy=$$no_proxy
+endif
+
 all: run
 
 build:
-	docker build $(OPTS) --build-arg user=$(USER) -t $(NAME) $(OPTS) .
+	docker build $(OPTS) $(BLD_OPTS) --build-arg user=$(USER) -t $(NAME) $(OPTS) .
 	docker run --rm -v $(VOLUME) -u root $(NAME) bash -c "touch .setup && chown -R ksaito:ksaito ."
 
 up:
