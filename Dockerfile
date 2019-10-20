@@ -24,6 +24,10 @@ RUN apt-get update && apt-get install -y \
 RUN ln -f -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 # Install goss https://github.com/aelsabbahy/goss
 RUN curl -fsSL https://goss.rocks/install | sh
+# Install awscli
+RUN apt-get update && apt-get install -y \
+    awscli \
+ && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
 
 ADD files/etc /etc
 
@@ -91,6 +95,7 @@ COPY --from=gobase /go/fzf/bin/fzf /usr/local/bin/fzf
 COPY --from=gobase /go/fzf//shell/completion.bash /etc/bash_completion.d/fzf
 COPY --from=gobase /go/fzf/shell/key-bindings.bash /etc/profile.d/fzf-key-bindings.sh
 RUN echo "ksaito ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ksaito
+
 # # upgrade
 # #RUN apt-get update && apt-get upgrade -y
 
