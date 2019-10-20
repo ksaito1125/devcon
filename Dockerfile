@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y \
 ADD files/etc /etc
 
 ARG user=ksaito
-RUN useradd $user
+RUN useradd -s /bin/bash $user
 WORKDIR /home/$user
 
 # FROM base AS docker-base
