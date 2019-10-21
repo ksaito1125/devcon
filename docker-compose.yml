@@ -6,6 +6,10 @@ services:
     command: >
       bash -c 'chown -R ${USER}:${USER} /home/${USER} &&
       tail -f /dev/null'
+    environment:
+      - http_proxy
+      - https_proxy
+      - no_proxy
     volumes:
       - ${NAME}_${USER}:/home/${USER}:cached
 volumes:
