@@ -11,6 +11,6 @@ services:
       - https_proxy
       - no_proxy
     volumes:
-      - ${NAME}_${USER}:/home/${USER}:cached
+      - devcon_ksaito:/home/${USER}:cached
 volumes:
-  dev_ksaito:
+  devcon_ksaito:
