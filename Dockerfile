@@ -35,17 +35,18 @@ ARG user=ksaito
 RUN useradd -s /bin/bash $user
 WORKDIR /home/$user
 
-# FROM base AS docker-base
-# # Install docker-ce https://docs.docker.com/install/linux/docker-ce/ubuntu/
-# RUN apt-get update && apt-get install -y \
-#     apt-transport-https \
-#     ca-certificates \
-#     curl \
-#     software-properties-common \
-#  && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
-#  && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) edge" \
-#  && apt-get update && apt-get install -y docker-ce-cli \
-#  && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
+
+FROM base AS docker-base
+# Install docker-ce https://docs.docker.com/install/linux/docker-ce/ubuntu/
+RUN apt-get update && apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common \
+ && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
+ && add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) edge" \
+ && apt-get update && apt-get install -y docker-ce-cli \
+ && apt-get -y autoremove && rm -rf /var/lib/apt/lists/*
 # # Install kubectl https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl
 # RUN apt-get update && apt-get install -y \
 #     apt-transport-https \
@@ -86,7 +87,7 @@ RUN git clone --depth 1 https://github.com/junegunn/fzf.git \
 #  && rm -rf /tmp/git-secrets-1.2.1
 
 
-FROM base
+FROM docker-base
 
 # Install ghq
 COPY --from=gobase /go/bin/ghq /usr/local/bin/ghq
