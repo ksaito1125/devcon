@@ -97,6 +97,9 @@ COPY --from=gobase /go/fzf//shell/completion.bash /etc/bash_completion.d/fzf
 COPY --from=gobase /go/fzf/shell/key-bindings.bash /etc/profile.d/fzf-key-bindings.sh
 RUN echo "ksaito ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ksaito
 
+COPY files/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # # upgrade
 # #RUN apt-get update && apt-get upgrade -y
 

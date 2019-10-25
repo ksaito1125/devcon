@@ -3,14 +3,14 @@ services:
   dev:
     image: ${NAME}
     hostname: devcon
-    command: >
-      bash -c 'chown -R ${USER}:${USER} /home/${USER} &&
-      tail -f /dev/null'
+    privileged: true
+    command: /entrypoint.sh ${USER}
     environment:
       - http_proxy
       - https_proxy
       - no_proxy
     volumes:
       - devcon_ksaito:/home/${USER}:cached
+      - /var/run/docker.sock:/var/run/docker.sock
 volumes:
   devcon_ksaito:
