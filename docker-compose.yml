@@ -4,6 +4,7 @@ services:
     image: ${NAME}
     hostname: devcon
     privileged: true
+    restart: always
     command: /entrypoint.sh ${USER}
     environment:
       - http_proxy
