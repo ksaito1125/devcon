@@ -93,6 +93,7 @@ FROM docker-base
 COPY --from=gobase /go/bin/ghq /usr/local/bin/ghq
 # Install fzf
 COPY --from=gobase /go/fzf/bin/fzf /usr/local/bin/fzf
+COPY --from=gobase /go/fzf/bin/fzf-tmux /usr/local/bin/fzf-tmux
 COPY --from=gobase /go/fzf//shell/completion.bash /etc/bash_completion.d/fzf
 COPY --from=gobase /go/fzf/shell/key-bindings.bash /etc/profile.d/fzf-key-bindings.sh
 RUN echo "ksaito ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/ksaito
