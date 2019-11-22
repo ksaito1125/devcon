@@ -73,7 +73,7 @@ RUN apt-get update && apt-get install -y \
 FROM golang:1.13.1 AS gobase
 
 # Install ghq
-RUN go get github.com/motemen/ghq
+RUN GO111MODULE=on go get github.com/motemen/ghq
 
 # Install fzf
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git \
