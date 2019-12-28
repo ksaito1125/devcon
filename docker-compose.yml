@@ -6,6 +6,8 @@ services:
     privileged: true
     restart: always
     command: /entrypoint.sh ${USER}
+    ports:
+      - 9090-9099:9090-9099
     environment:
       - http_proxy
       - https_proxy
