@@ -1,0 +1,6 @@
+
+name: 'Developer Container'
+description: 'Container for develop environment'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
